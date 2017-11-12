@@ -31,17 +31,20 @@ def order_of_play():
 def x_or_o():
     print(rand,"do you want to be X or O?")
     global marker
-    marker = input(str()).upper()
-    print(marker)
-    if marker == "X":
-        global opp_marker
-        opp_marker = "O"
-        print(rand, "is X")
-        print(opp_rand, "is O")
-    elif marker == "O":
-        opp_marker = "X"
-        print(rand, "is O")
-        print(opp_rand, "is X")
+    while True:
+        marker = input(str()).upper()
+        if marker != "X" or marker != "O":
+            print('Invalid input. Please enter X or O')
+            continue
+        if marker == "X":
+            global opp_marker
+            opp_marker = "O"
+            print(rand, "is X")
+            print(opp_rand, "is O")
+        elif marker == "O":
+            opp_marker = "X"
+            print(rand, "is O")
+            print(opp_rand, "is X")
 
 
 def player_one():
@@ -50,6 +53,12 @@ def player_one():
         row = int(input())
         print(rand, "what col do you want to go?")
         col = int(input())
+        if row > 3:
+            print("Number of rows is out a range. Please re-enter your moves")
+            continue
+        if col > 3:
+            print("Number of cols is out a range. Please re-enter your moves")
+            continue
         if board[row - 1][col -1] == "X" or board[row - 1][col -1] == "O":
             print("Uh-Oh, there is already something there. Please re-enter your moves")
             continue
@@ -63,6 +72,12 @@ def player_two():
         row = int(input())
         print(opp_rand, "what col do you want to go?")
         col = int(input())
+        if row > 3:
+            print("Number of rows is out a range. Please re-enter your moves")
+            continue
+        if col > 3:
+            print("Number of cols is out a range. Please re-enter your moves")
+            continue
         if board[row - 1][col -1] == "X" or board[row - 1][col -1] == "O":
             print("Uh-Oh, there is already something there. Please re-enter your moves")
             continue
@@ -71,6 +86,7 @@ def player_two():
     board[row - 1][col -1] = opp_marker
 
 def full_board():
+    global again
     new_list = ""
     for sublist in board:
         for n in sublist:
@@ -78,15 +94,20 @@ def full_board():
     if '.' in new_list:
         pass
     else:
-        print("Tie Game. Would you like to play again? Enter Y or N")
-        again = input().upper()
-        if again == "Y":
-            clear_board()
-        if again == "N":
-            print("See you later")
-            pass
+        while True:
+            print("Tie Game. Would you like to play again? Enter Y or N")
+            again = input().upper()
+            if again != "Y" or again != "N":
+               print("Invalid input. Please enter Y or N")
+               continue
+            if again == "Y":
+               clear_board()
+            if again == "N":
+                print("See you later")
+                pass
 
 def won_game_x():
+    global again
     if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X" \
         or board[1][0] == "X" and board[1][1] == "X" and board[1][2] == "X" \
         or board[2][0] == "X" and board[2][1] == "X" and board[2][2] == "X" \
@@ -97,13 +118,18 @@ def won_game_x():
         or board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
 
         print("X has Won!! Would you like to play again? Please enter Y or N")
-        again = input().upper()
-        if again == "Y":
-            clear_board()
-        if again == "N":
-            print("See you later!")
+        while True:
+            again = input().upper()
+            if again != "Y" or again != "N":
+                print("Invalid input. Please enter Y or N")
+                continue
+            if again == "Y":
+                clear_board()
+            if again == "N":
+                print("See you later!")
 
 def won_game_o():
+    global again
     if board[0][0] == "O" and board[0][1] == "O" and board[0][2] == "O" \
         or board[1][0] == "O" and board[1][1] == "O" and board[1][2] == "O" \
         or board[2][0] == "O" and board[2][1] == "O" and board[2][2] == "O" \
@@ -114,11 +140,15 @@ def won_game_o():
         or board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
 
         print("O has Won!! Would you like to play again? Please enter Y or N")
-        again = input().upper()
-        if again == "Y":
-           clear_board()
-        if again == "N":
-            print("See you later!")
+        while True:
+            again = input().upper()
+            if again != "Y" or again != "N":
+                print("Invalid input. Please enter Y or N")
+                continue
+            if again == "Y":
+                clear_board()
+            if again == "N":
+                print("See you later!")
 
 def clear_board():
     global board
@@ -138,6 +168,7 @@ def play_game():
         global again
         if again == "N":
             break
+        print(again)
         won_game_o()
         if again == "N":
             break
