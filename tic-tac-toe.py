@@ -2,8 +2,7 @@
 from IPython.display import clear_output
 import random
 
-board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-win = [[1, 2, 3],[4, 5, 6],[7, 8, 9],[1, 4, 7],[2, 5, 8],[3, 6, 9],[1, 5, 9],[3, 5, 7]]
+board = [['.', '.', '.'], ['.', '.', '.'], ['.', '.', '.']]
 
 def names():
     print("Player 1, what is your name?")
@@ -14,9 +13,9 @@ def names():
     name2 = input()
 
 def print_board():
-    print(board[0])
-    print(board[1])
-    print(board[2])
+    print(*board[0],'')
+    print(*board[1],'')
+    print(*board[2],'')
 
 def order_of_play():
     players = [name1, name2]
@@ -46,18 +45,28 @@ def x_or_o():
 
 
 def player_one():
-    print(rand, "what row do you want to go in?")
-    row = int(input())
-    print(rand, "what col do you want to go?")
-    col = int(input())
-    board[row - 1][col -1] = marker
+   # while True:
+        print(rand, "what row do you want to go in?")
+        row = int(input())
+        print(rand, "what col do you want to go?")
+        col = int(input())
+        if board[row - 1][col -1] == "X" or board[row - 1][col -1] == "O":
+            print("Uh-Oh, there is already something there. Please re-enter your moves")
+        else:
+            pass
+        board[row - 1][col -1] = marker
 
 def player_two():
-    print(opp_rand, "what row do you want to go in?")
-    row = int(input())
-    print(opp_rand, "what col do you want to go?")
-    col = int(input())
-    board[row - 1][col -1] = opp_marker
+  #  while True:
+        print(opp_rand, "what row do you want to go in?")
+        row = int(input())
+        print(opp_rand, "what col do you want to go?")
+        col = int(input())
+        if board[row - 1][col -1] == "X" or board[row - 1][col -1] == "O":
+            print("Uh-Oh, there is already something there. Please re-enter your moves")
+        else:
+            pass
+        board[row - 1][col -1] = opp_marker
 
 def full_board():
     for i in range(len(board)):
@@ -98,22 +107,28 @@ def won_game_o():
         print("O has Won!! Would you like to play again? Please enter Y or N")
         again = input().upper()
         if input == "Y":
-            board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
             print("ok")
         elif input == "N":
             print("See you later!")
-names()
-order_of_play()
-x_or_o()
-while True:
 
-    print_board()
-    player_one()
-    won_game_x()
-    won_game_o()
-    full_board()
-    print_board()
-    player_two()
-    won_game_x()
-    won_game_o()
-    full_board()
+
+def play_game():
+    names()
+    order_of_play()
+    x_or_o()
+
+    while True:
+
+        print_board()
+        player_one()
+        won_game_x()
+        won_game_o()
+        full_board()
+        print_board()
+        player_two()
+        won_game_x()
+        won_game_o()
+        full_board()
+
+play_game()
