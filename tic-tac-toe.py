@@ -2,6 +2,7 @@
 import random
 
 board = [['.', '.', '.'], ['.', '.', '.'], ['.', '.', '.']]
+again = ""
 
 def names():
     print("Player 1, what is your name?")
@@ -70,14 +71,18 @@ def player_two():
     board[row - 1][col -1] = opp_marker
 
 def full_board():
-    for i in range(len(board)):
-            if i == "X" or i == "O":
-                print("Tie Game. Would you like to play again? Enter Y or N")
-                again = input().upper()
-                if again == "Y":
-                    clear_board()
-                else:
-                    break
+    new_list = ""
+    for sublist in board:
+        for n in sublist:
+            new_list += str(n)
+    if '.' in new_list:
+        pass
+    else:
+        print("Tie Game. Would you like to play again? Enter Y or N")
+        again = input().upper()
+        if again == "Y":
+            clear_board()
+
 def won_game_x():
     if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X" \
         or board[1][0] == "X" and board[1][1] == "X" and board[1][2] == "X" \
@@ -113,6 +118,7 @@ def won_game_o():
             print("See you later!")
 
 def clear_board():
+    global board
     board = [['.', '.', '.'], ['.', '.', '.'], ['.', '.', '.']]
 
 
@@ -121,7 +127,7 @@ def play_game():
     order_of_play()
     x_or_o()
 
-    while True:
+    while again != "N":
 
         print_board()
         player_one()
