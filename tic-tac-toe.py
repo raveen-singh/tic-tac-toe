@@ -2,7 +2,7 @@
 import random
 
 board = [['.', '.', '.'], ['.', '.', '.'], ['.', '.', '.']]
-again = ""
+again = "Y"
 
 def names():
     print("Player 1, what is your name?")
@@ -82,6 +82,9 @@ def full_board():
         again = input().upper()
         if again == "Y":
             clear_board()
+        if again == "N":
+            print("See you later")
+            pass
 
 def won_game_x():
     if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X" \
@@ -90,14 +93,14 @@ def won_game_x():
         or board[0][0] == "X" and board[1][0] == "X" and board[2][0] == "X" \
         or board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X" \
         or board[0][2] == "X" and board[1][2] == "X" and board[2][2] == "X" \
-        or board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X" \
+        or board[2][0] == "X" and board[1][1] == "X" and board[0][2] == "X" \
         or board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
 
         print("X has Won!! Would you like to play again? Please enter Y or N")
         again = input().upper()
         if again == "Y":
             clear_board()
-        elif again == "N":
+        if again == "N":
             print("See you later!")
 
 def won_game_o():
@@ -107,14 +110,14 @@ def won_game_o():
         or board[0][0] == "O" and board[1][0] == "O" and board[2][0] == "O" \
         or board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O" \
         or board[0][2] == "O" and board[1][2] == "O" and board[2][2] == "O" \
-        or board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O" \
+        or board[2][0] == "O" and board[1][1] == "O" and board[0][2] == "O" \
         or board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
 
         print("O has Won!! Would you like to play again? Please enter Y or N")
         again = input().upper()
         if again == "Y":
            clear_board()
-        elif again == "N":
+        if again == "N":
             print("See you later!")
 
 def clear_board():
@@ -127,18 +130,31 @@ def play_game():
     order_of_play()
     x_or_o()
 
-    while again != "N":
+    while True:
 
         print_board()
         player_one()
         won_game_x()
+        global again
+        if again == "N":
+            break
         won_game_o()
+        if again == "N":
+            break
         full_board()
+        if again == "N":
+            break
         print_board()
         player_two()
         won_game_x()
+        if again == "N":
+            break
         won_game_o()
+        if again == "N":
+            break
         full_board()
+        if again == "N":
+            break
 
 play_game()
 
