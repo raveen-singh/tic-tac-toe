@@ -1,5 +1,4 @@
 # tic-tac-toe
-from IPython.display import clear_output
 import random
 
 board = [['.', '.', '.'], ['.', '.', '.'], ['.', '.', '.']]
@@ -45,28 +44,30 @@ def x_or_o():
 
 
 def player_one():
-   # while True:
+    while True:
         print(rand, "what row do you want to go in?")
         row = int(input())
         print(rand, "what col do you want to go?")
         col = int(input())
         if board[row - 1][col -1] == "X" or board[row - 1][col -1] == "O":
             print("Uh-Oh, there is already something there. Please re-enter your moves")
+            continue
         else:
-            pass
-        board[row - 1][col -1] = marker
+            break
+    board[row - 1][col -1] = marker
 
 def player_two():
-  #  while True:
+    while True:
         print(opp_rand, "what row do you want to go in?")
         row = int(input())
         print(opp_rand, "what col do you want to go?")
         col = int(input())
         if board[row - 1][col -1] == "X" or board[row - 1][col -1] == "O":
             print("Uh-Oh, there is already something there. Please re-enter your moves")
+            continue
         else:
-            pass
-        board[row - 1][col -1] = opp_marker
+            break
+    board[row - 1][col -1] = opp_marker
 
 def full_board():
     for i in range(len(board)):
@@ -74,7 +75,7 @@ def full_board():
                 print("Tie Game. Would you like to play again? Enter Y or N")
                 again = input().upper()
                 if again == "Y":
-                    continue
+                    clear_board()
                 else:
                     break
 def won_game_x():
@@ -84,14 +85,14 @@ def won_game_x():
         or board[0][0] == "X" and board[1][0] == "X" and board[2][0] == "X" \
         or board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X" \
         or board[0][2] == "X" and board[1][2] == "X" and board[2][2] == "X" \
-        or board[0][1] == "X" and board[1][1] == "X" and board[2][0] == "X" \
+        or board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X" \
         or board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
 
         print("X has Won!! Would you like to play again? Please enter Y or N")
         again = input().upper()
-        if input == "Y":
-            print("ok")
-        elif input == "N":
+        if again == "Y":
+            clear_board()
+        elif again == "N":
             print("See you later!")
 
 def won_game_o():
@@ -101,16 +102,18 @@ def won_game_o():
         or board[0][0] == "O" and board[1][0] == "O" and board[2][0] == "O" \
         or board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O" \
         or board[0][2] == "O" and board[1][2] == "O" and board[2][2] == "O" \
-        or board[0][1] == "O" and board[1][1] == "O" and board[2][0] == "O" \
+        or board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O" \
         or board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
 
         print("O has Won!! Would you like to play again? Please enter Y or N")
         again = input().upper()
-        if input == "Y":
-
-            print("ok")
-        elif input == "N":
+        if again == "Y":
+           clear_board()
+        elif again == "N":
             print("See you later!")
+
+def clear_board():
+    board = [['.', '.', '.'], ['.', '.', '.'], ['.', '.', '.']]
 
 
 def play_game():
@@ -132,3 +135,4 @@ def play_game():
         full_board()
 
 play_game()
+
