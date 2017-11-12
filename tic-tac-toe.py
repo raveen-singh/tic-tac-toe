@@ -6,10 +6,10 @@ board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 win = [[1, 2, 3],[4, 5, 6],[7, 8, 9],[1, 4, 7],[2, 5, 8],[3, 6, 9],[1, 5, 9],[3, 5, 7]]
 
 def names():
-    print("What is your name?")
+    print("Player 1, what is your name?")
     global name1
     name1 = input()
-    print("What is your name?")
+    print("Player 2, what is your name?")
     global name2
     name2 = input()
 
@@ -32,14 +32,14 @@ def order_of_play():
 def x_or_o():
     print(rand,"do you want to be X or O?")
     global marker
-    marker = input(str())
+    marker = input(str()).upper()
     print(marker)
-    if marker == "X" or marker == "x":
+    if marker == "X":
         global opp_marker
         opp_marker = "O"
         print(rand, "is X")
         print(opp_rand, "is O")
-    elif marker == "O" or marker =="o":
+    elif marker == "O":
         opp_marker = "X"
         print(rand, "is O")
         print(opp_rand, "is X")
@@ -59,15 +59,61 @@ def player_two():
     col = int(input())
     board[row - 1][col -1] = opp_marker
 
+def full_board():
+    for i in range(len(board)):
+            if i == "X" or i == "O":
+                print("Tie Game. Would you like to play again? Enter Y or N")
+                again = input().upper()
+                if again == "Y":
+                    continue
+                else:
+                    break
+def won_game_x():
+    if board[0][0] == "X" and board[0][1] == "X" and board[0][2] == "X" \
+        or board[1][0] == "X" and board[1][1] == "X" and board[1][2] == "X" \
+        or board[2][0] == "X" and board[2][1] == "X" and board[2][2] == "X" \
+        or board[0][0] == "X" and board[1][0] == "X" and board[2][0] == "X" \
+        or board[0][1] == "X" and board[1][1] == "X" and board[2][1] == "X" \
+        or board[0][2] == "X" and board[1][2] == "X" and board[2][2] == "X" \
+        or board[0][1] == "X" and board[1][1] == "X" and board[2][0] == "X" \
+        or board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
 
+        print("X has Won!! Would you like to play again? Please enter Y or N")
+        again = input().upper()
+        if input == "Y":
+            print("ok")
+        elif input == "N":
+            print("See you later!")
 
+def won_game_o():
+    if board[0][0] == "O" and board[0][1] == "O" and board[0][2] == "O" \
+        or board[1][0] == "O" and board[1][1] == "O" and board[1][2] == "O" \
+        or board[2][0] == "O" and board[2][1] == "O" and board[2][2] == "O" \
+        or board[0][0] == "O" and board[1][0] == "O" and board[2][0] == "O" \
+        or board[0][1] == "O" and board[1][1] == "O" and board[2][1] == "O" \
+        or board[0][2] == "O" and board[1][2] == "O" and board[2][2] == "O" \
+        or board[0][1] == "O" and board[1][1] == "O" and board[2][0] == "O" \
+        or board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
 
-
+        print("O has Won!! Would you like to play again? Please enter Y or N")
+        again = input().upper()
+        if input == "Y":
+            board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+            print("ok")
+        elif input == "N":
+            print("See you later!")
 names()
 order_of_play()
 x_or_o()
-print_board()
-player_one()
-print_board()
-player_two()
-print_board()
+while True:
+
+    print_board()
+    player_one()
+    won_game_x()
+    won_game_o()
+    full_board()
+    print_board()
+    player_two()
+    won_game_x()
+    won_game_o()
+    full_board()
